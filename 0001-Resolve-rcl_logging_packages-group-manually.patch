@@ -1,0 +1,39 @@
+From d363d569df8f9d78617522e8cc7663b341be303c Mon Sep 17 00:00:00 2001
+From: Scott K Logan <logans@cottsay.net>
+Date: Wed, 3 Apr 2024 13:52:50 -0500
+Subject: [PATCH] Resolve rcl_logging_packages group manually
+
+---
+ rpm/ros-rolling-rcl.spec | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/rpm/ros-rolling-rcl.spec b/rpm/ros-rolling-rcl.spec
+index 48dc9ba9fbbf..246ab6fd1ba6 100644
+--- a/rpm/ros-rolling-rcl.spec
++++ b/rpm/ros-rolling-rcl.spec
+@@ -1,3 +1,4 @@
++%global _bloom_disable_groups 1
+ %{?!ros_distro:%global ros_distro rolling}
+ %global pkg_name rcl
+ %global normalized_pkg_name %{lua:return (string.gsub(rpm.expand('%{pkg_name}'), '_', '-'))}
+@@ -37,6 +38,8 @@ client libraries.
+ %package runtime
+ Release:        %{release}
+ Summary:        %{summary}
++Requires:       ros-%{ros_distro}(rcl_logging_packages)(member)
++Recommends:     ros-%{ros_distro}(rcl_logging_spdlog)
+ 
+ %description runtime
+ The ROS client library common implementation. This package contains an API which
+@@ -49,7 +52,7 @@ client libraries.
+ 
+ 
+ %generate_buildrequires
+-%bloom_buildrequires
++%bloom_buildrequires -g
+ 
+ 
+ %build
+-- 
+2.44.0
+
