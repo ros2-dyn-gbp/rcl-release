@@ -1,3 +1,4 @@
+%global _bloom_disable_groups 1
 %{?!ros_distro:%global ros_distro rolling}
 %global pkg_name rcl
 %global normalized_pkg_name %{lua:return (string.gsub(rpm.expand('%{pkg_name}'), '_', '-'))}
@@ -37,6 +38,8 @@ client libraries.
 %package runtime
 Release:        %{release}
 Summary:        %{summary}
+Requires:       ros-%{ros_distro}(rcl_logging_packages)(member)
+Recommends:     ros-%{ros_distro}(rcl_logging_spdlog)
 
 %description runtime
 The ROS client library common implementation. This package contains an API which
@@ -49,7 +52,7 @@ client libraries.
 
 
 %generate_buildrequires
-%bloom_buildrequires
+%bloom_buildrequires -g
 
 
 %build
