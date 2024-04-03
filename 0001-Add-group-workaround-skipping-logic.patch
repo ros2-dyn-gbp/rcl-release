@@ -1,0 +1,25 @@
+From 58a83f07c448f414d10e8bf38fdb22593795d4a6 Mon Sep 17 00:00:00 2001
+From: Scott K Logan <logans@cottsay.net>
+Date: Wed, 3 Apr 2024 13:49:20 -0500
+Subject: [PATCH] Add group workaround skipping logic
+
+---
+ package.xml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/package.xml b/package.xml
+index 70be7c215231..b3b9c42d7d2c 100644
+--- a/package.xml
++++ b/package.xml
+@@ -22,7 +22,7 @@
+   <depend>libyaml_vendor</depend>
+   <depend>rcl_interfaces</depend>
+   <depend>rcl_logging_interface</depend>
+-  <depend>rcl_logging_spdlog</depend> <!-- the default logging impl -->
++  <depend condition="$DISABLE_GROUP_WORKAROUND != 1">rcl_logging_spdlog</depend> <!-- the default logging impl -->
+   <depend>rcl_yaml_param_parser</depend>
+   <depend>rcutils</depend>
+   <depend>rmw_implementation</depend>
+-- 
+2.44.0
+
