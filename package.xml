@@ -22,7 +22,7 @@
   <depend>libyaml_vendor</depend>
   <depend>rcl_interfaces</depend>
   <depend>rcl_logging_interface</depend>
-  <depend>rcl_logging_spdlog</depend> <!-- the default logging impl -->
+  <depend condition="$DISABLE_GROUP_WORKAROUND != 1">rcl_logging_spdlog</depend> <!-- the default logging impl -->
   <depend>rcl_yaml_param_parser</depend>
   <depend>rcutils</depend>
   <depend>rmw_implementation</depend>
